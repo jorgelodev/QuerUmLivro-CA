@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.19" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.19" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuerUmLivro.Infra.Data\QuerUmLivro.Infra.Data.csproj" />
+    <ProjectReference Include="..\QuerUmLivro.Infra.Ioc\QuerUmLivro.Infra.Ioc.csproj" />
+    <ProjectReference Include="..\QuerUmLivro.Infra.Mapper\QuerUmLivro.Infra.Mapper.csproj" />
+    <ProjectReference Include="..\QuerUmLivro.Infra.Services\QuerUmLivro.Infra.Services.csproj" />
+  </ItemGroup>
+
+</Project>
