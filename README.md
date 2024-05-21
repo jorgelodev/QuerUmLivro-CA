@@ -35,5 +35,5 @@ A aplicação foi construída com foco em separação de preocupações, indepen
 
 Esta API fornece documentação Swagger para seus endpoints.
 
-## Grupo 33
+## Grupo 33 - 2NETT
 Jorge - RM351049
