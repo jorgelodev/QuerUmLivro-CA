@@ -9,10 +9,9 @@ namespace QuerUmLivro.Domain.Entities
         public Livro Livro { get; set; }
         public int InteressadoId { get; set; }
         public Usuario Interessado { get; set; }
-
         public string Justificativa { get; set; }
         public StatusInteresse Status { get; private set; }
-        public bool Aprovado { get; set; }
+        //public bool Aprovado { get; set; }
         public DateTime Data { get; set; }
 
         public Interesse(int livroId, int interessadoId, string justificativa, StatusInteresse status, DateTime data)

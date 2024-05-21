@@ -17,31 +17,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.3 - Data", "2.3 - Data", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuerUmLivro.Infra.Data", "QuerUmLivro.Infra.Data\QuerUmLivro.Infra.Data.csproj", "{75A4EB62-4D21-4A76-BFE2-D76759C6D126}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuerUmLivro.Infra.Services", "QuerUmLivro.Infra.Services\QuerUmLivro.Infra.Services.csproj", "{451D1F4B-9247-41C7-8B00-3433BAA5E6F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuerUmLivro.Infra.Services", "QuerUmLivro.Infra.Services\QuerUmLivro.Infra.Services.csproj", "{451D1F4B-9247-41C7-8B00-3433BAA5E6F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuerUmLivro.Gateways", "QuerUmLivro.Gateways\QuerUmLivro.Gateways.csproj", "{FBA91D5D-AA4B-4620-8551-251CB7B3339E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuerUmLivro.Gateways", "QuerUmLivro.Gateways\QuerUmLivro.Gateways.csproj", "{FBA91D5D-AA4B-4620-8551-251CB7B3339E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.4 - Ioc", "2.4 - Ioc", "{770B9CED-C69D-4868-BF82-8D9E9D8A45A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.5 - Mapper", "2.5 - Mapper", "{E384A92E-8F24-4D4A-834E-D48AF418CF30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuerUmLivro.Infra.Ioc", "QuerUmLivro.Infra.Ioc\QuerUmLivro.Infra.Ioc.csproj", "{52019518-0C35-4FEE-9557-66A84B79028E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuerUmLivro.Infra.Ioc", "QuerUmLivro.Infra.Ioc\QuerUmLivro.Infra.Ioc.csproj", "{52019518-0C35-4FEE-9557-66A84B79028E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuerUmLivro.Domain", "QuerUmLivro.Domain\QuerUmLivro.Domain.csproj", "{4E7253D9-5A8C-473D-9A24-5FB221C41D8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuerUmLivro.Domain", "QuerUmLivro.Domain\QuerUmLivro.Domain.csproj", "{4E7253D9-5A8C-473D-9A24-5FB221C41D8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuerUmLivro.Infra.Mapper", "QuerUmLivro.Infra.Mapper\QuerUmLivro.Infra.Mapper.csproj", "{AA933FBA-EB50-4A3F-AA32-001034DDE1F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuerUmLivro.Infra.Mapper", "QuerUmLivro.Infra.Mapper\QuerUmLivro.Infra.Mapper.csproj", "{AA933FBA-EB50-4A3F-AA32-001034DDE1F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuerUmLivro.API", "QuerUmLivro.API\QuerUmLivro.API.csproj", "{B63E3D38-D0F6-40AD-BD0D-63171BE80974}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuerUmLivro.API", "QuerUmLivro.API\QuerUmLivro.API.csproj", "{B63E3D38-D0F6-40AD-BD0D-63171BE80974}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Test", "4 - Test", "{1465C12E-33F1-48D9-9DC7-2F5C99670D41}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Domain", "4.1 - Domain", "{55EE850F-3D71-4127-9B23-E2CFF97D4498}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuerUmLivro.Test.Domain", "QuerUmLivro.Test.Domain\QuerUmLivro.Test.Domain.csproj", "{6DA9DB5D-3D89-4A63-9619-2F07A57E1AFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuerUmLivro.Test.Domain", "QuerUmLivro.Test.Domain\QuerUmLivro.Test.Domain.csproj", "{6DA9DB5D-3D89-4A63-9619-2F07A57E1AFA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - Infrastructure", "4.2 - Infrastructure", "{5766D770-8D93-468A-B476-6FCF9CA8EF2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuerUmLivro.Infrasctructure", "QuerUmLivro.Infrasctructure\QuerUmLivro.Infrasctructure.csproj", "{F7D7AE8D-FA79-4FA1-928C-4CE17DEAD445}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuerUmLivro.Infrasctructure", "QuerUmLivro.Infrasctructure\QuerUmLivro.Infrasctructure.csproj", "{F7D7AE8D-FA79-4FA1-928C-4CE17DEAD445}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

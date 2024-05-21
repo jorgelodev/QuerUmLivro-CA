@@ -16,7 +16,7 @@ namespace QuerUmLivro.Test.Domain.Specifications.Livros
             _specification = new LivroIdObrigatorioSpec();
 
             _livroFaker = new Faker<Livro>()
-                .CustomInstantiator(f => new Livro(f.Commerce.ProductName()))
+                .CustomInstantiator(f => new Livro(f.Commerce.ProductName(), f.Random.Int(1, 100)))
                 .RuleFor(l => l.Id, f => f.Random.Int(1, 100));
         }
 

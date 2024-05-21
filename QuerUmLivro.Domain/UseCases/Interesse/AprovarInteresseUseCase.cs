@@ -11,7 +11,7 @@ namespace QuerUmLivro.Domain.UseCases.Livros
         private readonly Interesse _interesse;        
         private readonly ILivroGateway _livroGateway;
         private readonly IUsuarioGateway _usuarioGateway;
-        public AprovarInteresseUseCase(Interesse interesse, ILivroGateway livroGateway, IUsuarioGateway usuarioGateway)
+        public AprovarInteresseUseCase(Interesse interesse, ILivroGateway livroGateway, IUsuarioGateway usuarioGateway) : base(interesse)
         {
             _interesse = interesse;
             _livroGateway = livroGateway;
@@ -27,10 +27,13 @@ namespace QuerUmLivro.Domain.UseCases.Livros
 
         public Interesse AprovarInteresse()
         {
-            ValidaEspecificacoes(_interesse);
+            ValidaEspecificacoes();
 
-            _interesse.Aprovar();   
-            
+            _interesse.Aprovar();
+
+            _interesse.Livro.Disponivel = false;
+
+            _livroGateway.Alterar(_interesse.Livro);
 
             return _interesse;
         }

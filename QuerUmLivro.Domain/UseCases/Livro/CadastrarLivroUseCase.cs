@@ -10,21 +10,20 @@ namespace QuerUmLivro.Domain.UseCases.Livros
         private readonly Livro _livro;        
         private readonly IUsuarioGateway _usuarioGateway;
         
-        public CadastrarLivroUseCase(Livro livro, IUsuarioGateway usuarioGateway)
+        public CadastrarLivroUseCase(Livro livro, IUsuarioGateway usuarioGateway) : base(livro)
         {
             _livro = livro;            
             _usuarioGateway = usuarioGateway;
 
             _specifications = new List<ISpecification<Livro>>
-            {
-                new LivroDoadorObrigatorioSpec(),
+            {                
                 new LivroDoadorExisteSpec(_usuarioGateway)
             };
         }
 
         public Livro Cadastrar()
         {
-            ValidaEspecificacoes(_livro);
+            ValidaEspecificacoes();
 
             _livro.Disponivel = true;
 

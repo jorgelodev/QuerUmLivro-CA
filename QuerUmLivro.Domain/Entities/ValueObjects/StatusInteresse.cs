@@ -1,7 +1,9 @@
-﻿namespace QuerUmLivro.Domain.Entities.ValueObjects
+﻿using QuerUmLivro.Domain.Exceptions;
+
+namespace QuerUmLivro.Domain.Entities.ValueObjects
 {
     public class StatusInteresse
-    {        
+    {
         public StatusInteresseEnum Value { get; private set; }
         public string Text { get; private set; }
         public enum StatusInteresseEnum
@@ -31,9 +33,12 @@
                 case StatusInteresseEnum.REPROVADO:
                     return Reprovado;
                 default:
-                    throw new ArgumentException("Valor inválido para StatusInteresseEnum", nameof(value));
+                    throw new DomainValidationException(new List<string> { "Valor inválido para StatusInteresseEnum" });
+
             }
         }
+
+        #region Métodos sobreescritos
 
         public override bool Equals(object obj)
         {
@@ -54,6 +59,7 @@
         {
             return Text;
         }
+        #endregion
     }
 
 

@@ -4,8 +4,6 @@ using QuerUmLivro.Infra.Services.DTOs.Interesses;
 using QuerUmLivro.Infra.Services.Interfaces;
 using QuerUmLivro.Infra.Services.ViewModels.Interesses;
 
-
-
 namespace QuerUmLivro.API.Controllers
 {    
     [ApiController]
@@ -40,7 +38,7 @@ namespace QuerUmLivro.API.Controllers
 
             var interesseManifestado = _intresseService.ManifestarInteresse(_mapper.Map<ManifestarInteresseDto>(manifestarInteresseViewModel));
 
-            return CustomResponse();
+            return Ok(interesseManifestado);
         }
 
         /// <summary>
@@ -61,11 +59,7 @@ namespace QuerUmLivro.API.Controllers
 
             var interesseAprovado = _intresseService.AprovarInteresse(_mapper.Map<AprovarInteresseDto>(aprovaInteresseViewModel));
 
-            //if (!interesseAprovado.ValidationResult.IsValid)
-
-            //    AdicionarErroProcessamento(interesseAprovado.ValidationResult);
-
-            return CustomResponse();
+            return Ok(interesseAprovado);
 
         }
     }

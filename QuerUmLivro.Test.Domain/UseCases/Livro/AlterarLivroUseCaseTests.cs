@@ -18,7 +18,7 @@ namespace QuerUmLivro.Test.Domain.UseCases.Livros
             _livroGatewayMock = new Mock<ILivroGateway>();
 
             _livroFaker = new Faker<Livro>()
-                .CustomInstantiator(f => new Livro(f.Commerce.ProductName()))
+                .CustomInstantiator(f => new Livro(f.Commerce.ProductName(), f.Random.Int(1, 100)))
                 .RuleFor(l => l.Id, f => f.Random.Int(1, 100))
                 .RuleFor(l => l.DoadorId, f => f.Random.Int(1, 100));
         }
@@ -41,28 +41,11 @@ namespace QuerUmLivro.Test.Domain.UseCases.Livros
         }
 
         [Fact]
-        public void Alterar_Should_ThrowException_When_DoadorIdIsZero()
-        {
-            // Arrange
-            var livro = _livroFaker.Generate();
-            livro.DoadorId = 0;
-
-            var useCase = new AlterarLivroUseCase(livro, _livroGatewayMock.Object);
-
-            // Act
-            Action action = () => useCase.Alterar();
-
-            // Assert
-            action.Should().Throw<DomainValidationException>()
-                .Which.ValidationErrors.Should().Contain("Doador é obrigatório");
-        }
-
-        [Fact]
         public void Alterar_Should_ThrowException_When_DoadorIsChanged()
         {
             // Arrange
             var livroOriginal = _livroFaker.Generate();
-            var livroAlterado = new Livro(livroOriginal.Nome)
+            var livroAlterado = new Livro(livroOriginal.Nome, 1)
             {
                 Id = livroOriginal.Id,
                 DoadorId = livroOriginal.DoadorId + 1 // Alterando o DoadorId

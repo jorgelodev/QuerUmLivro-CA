@@ -10,9 +10,6 @@ namespace QuerUmLivro.Domain.Entities
         protected EntityBase()
         {
             
-        }
-
-
-            
+        }            
     }
 }

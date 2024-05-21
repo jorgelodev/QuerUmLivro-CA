@@ -4,7 +4,6 @@ using QuerUmLivro.Infra.Services.DTOs.Usuarios;
 using QuerUmLivro.Infra.Services.Interfaces;
 using QuerUmLivro.Infra.Services.ViewModels.Usuarios;
 
-
 namespace QuerUmLivro.API.Controllers
 {
     [ApiController]
@@ -63,11 +62,7 @@ namespace QuerUmLivro.API.Controllers
 
             var alteraUsuarioDto = _usuarioService.Alterar(_mapper.Map<AlteraUsuarioDto>(alteraUsuarioViewModel));
 
-            //if (!alteraUsuarioDto.ValidationResult.IsValid)
-
-            //    AdicionarErroProcessamento(alteraUsuarioDto.ValidationResult);
-
-            return CustomResponse();
+            return Ok(alteraUsuarioDto);
 
         }
 
@@ -86,10 +81,6 @@ namespace QuerUmLivro.API.Controllers
         public IActionResult ObterPorId([FromRoute] int id)
         {
             var usuarioViewModel = _mapper.Map<UsuarioViewModel>(_usuarioService.ObterPorId(id));
-
-            if (usuarioViewModel == null)
-
-                return NotFound("Usuario não encontrado");
 
             return Ok(usuarioViewModel);
         }
@@ -112,11 +103,7 @@ namespace QuerUmLivro.API.Controllers
 
             var usuarioDto = _usuarioService.Desativar(id);
 
-            //if (!usuarioDto.ValidationResult.IsValid)
-
-            //    AdicionarErroProcessamento(usuarioDto.ValidationResult);
-
-            return CustomResponse();
+            return Ok(usuarioDto);
 
         }
     }

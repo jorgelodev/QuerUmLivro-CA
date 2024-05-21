@@ -16,7 +16,8 @@ namespace QuerUmLivro.Domain.UseCases.Livros
             Interesse interesse, 
             IInteresseGateway intereesseGateway, 
             ILivroGateway livroGateway, 
-            IUsuarioGateway usuarioGateway)
+            IUsuarioGateway usuarioGateway) 
+            : base(interesse)
         {
             _interesse = interesse;
             _interesseGateway = intereesseGateway;
@@ -37,7 +38,7 @@ namespace QuerUmLivro.Domain.UseCases.Livros
         {
             _interesse.Data = DateTime.Now;
 
-            ValidaEspecificacoes(_interesse);
+            ValidaEspecificacoes();
 
             return _interesse;
         }

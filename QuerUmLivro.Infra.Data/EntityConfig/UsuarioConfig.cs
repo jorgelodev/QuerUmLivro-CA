@@ -22,7 +22,7 @@ namespace QuerUmLivro.Infra.Data.EntityConfig
              .IsRequired()
              .HasMaxLength(100)
              .HasConversion(
-                 email => email.Value, 
+                 email => email.EnderecoEmail, 
                  value => new Email(value) 
              );
 

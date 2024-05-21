@@ -9,22 +9,21 @@ namespace QuerUmLivro.Domain.UseCases.Livros
     {
         private readonly Livro _livro;        
         private readonly ILivroGateway _livroGateway;        
-        public AlterarLivroUseCase(Livro livro, ILivroGateway livroGateway)
+        public AlterarLivroUseCase(Livro livro, ILivroGateway livroGateway) : base(livro)
         {
             _livro = livro;
             _livroGateway = livroGateway;
 
             _specifications = new List<ISpecification<Livro>>
             {
-                new LivroIdObrigatorioSpec(),
-                new LivroDoadorObrigatorioSpec(),
+                new LivroIdObrigatorioSpec(),                
                 new LivroDoadorNaoPodeSerAlteradoSpec(_livroGateway)
             };
         }
 
         public void Alterar()
         {
-            ValidaEspecificacoes(_livro);            
+            ValidaEspecificacoes();            
         }
     }
 }

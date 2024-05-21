@@ -60,11 +60,7 @@ namespace QuerUmLivro.API.Controllers
 
             var alteraLivroDto = _livroService.Alterar(_mapper.Map<AlteraLivroDto>(alteraLivroViewModel));
 
-            //if (!alteraLivroDto.ValidationResult.IsValid)
-
-            //    AdicionarErroProcessamento(alteraLivroDto.ValidationResult);
-
-            return CustomResponse();
+            return Ok(alteraLivroDto);
 
         }
 
@@ -83,10 +79,6 @@ namespace QuerUmLivro.API.Controllers
         public IActionResult ObterPorId([FromRoute] int id)
         {
             var livroViewModel = _mapper.Map<LivroViewModel>(_livroService.ObterPorId(id));
-
-            if (livroViewModel == null)
-
-                return NotFound("Livro não encontrado");
 
             return Ok(livroViewModel);
         }
@@ -147,11 +139,7 @@ namespace QuerUmLivro.API.Controllers
 
             var livroDto = _livroService.Deletar(id);
 
-            //if (!livroDto.ValidationResult.IsValid)
-
-            //    AdicionarErroProcessamento(livroDto.ValidationResult);
-
-            return CustomResponse();
+            return Ok(livroDto);
 
         }
 
@@ -172,7 +160,6 @@ namespace QuerUmLivro.API.Controllers
             var livrosViewModel = _mapper.Map<ICollection<LivroComInteressesViewModel>>(_livroService.ObterComInteresse(idDoador));
 
             return Ok(livrosViewModel);
-
         }
 
     }

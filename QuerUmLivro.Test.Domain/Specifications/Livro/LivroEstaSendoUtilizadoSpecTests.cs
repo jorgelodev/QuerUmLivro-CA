@@ -13,8 +13,9 @@ namespace QuerUmLivro.Test.Domain.Specifications.Livros
     {
         private readonly Mock<IInteresseGateway> _interesseGatewayMock;
         private readonly LivroEstaSendoUtilizadoSpec _specification;
-        private readonly Faker<Livro> _livroFaker;
-        private readonly Faker<Interesse> _interesseFaker;
+        private readonly Livro _livroFaker;
+        private readonly Interesse _interesseFaker;
+        private readonly Usuario _usuarioFaker;
 
         public LivroEstaSendoUtilizadoSpecTests()
         {
@@ -22,8 +23,13 @@ namespace QuerUmLivro.Test.Domain.Specifications.Livros
             _specification = new LivroEstaSendoUtilizadoSpec(_interesseGatewayMock.Object);
 
             _livroFaker = new Faker<Livro>()
-                .CustomInstantiator(f => new Livro(f.Commerce.ProductName()))
-                .RuleFor(l => l.DoadorId, f => f.Random.Int(1, 100));
+                .CustomInstantiator(f => new Livro(f.Commerce.ProductName(), f.Random.Int(1, 100)))
+                .RuleFor(l => l.DoadorId, f => f.Random.Int(1, 100))
+                .Generate();
+
+            _usuarioFaker = new Faker<Usuario>()
+                .CustomInstantiator(f => new Usuario(f.Person.FullName, new Email(f.Person.Email)))
+                .RuleFor(u => u.Id, f => f.Random.Int(1, 100));
 
             _interesseFaker = new Faker<Interesse>()
             .CustomInstantiator(f => new Interesse(
@@ -31,23 +37,22 @@ namespace QuerUmLivro.Test.Domain.Specifications.Livros
                 f.Random.Int(1, 100),
                 f.Lorem.Sentence(), StatusInteresse.EmAnalise,
                 f.Date.Past()))
-            .RuleFor(i => i.LivroId, (f, i) => i.Livro.Id)
-            .RuleFor(i => i.InteressadoId, (f, i) => i.Interessado.Id);
+            .RuleFor(i => i.LivroId, (f, i) => _livroFaker.Id)
+            .RuleFor(i => i.InteressadoId, (f, i) => _usuarioFaker.Id)
+            .RuleFor(i => i.Interessado, (f, i) => _usuarioFaker)
+            .Generate();
         }
 
         [Fact]
         public void ReturnFalse_When_LivroIsBeingUsed()
         {
             // Arrange
-            var livro = _livroFaker.Generate();
-            var interesse = _interesseFaker.Generate();
-            interesse.LivroId = livro.Id;
 
-            _interesseGatewayMock.Setup(g => g.ObterPorLivro(livro.Id))
-                .Returns(new List<Interesse> { interesse }.ToList());
+            _interesseGatewayMock.Setup(g => g.ObterPorLivro(_livroFaker.Id))
+                .Returns(new List<Interesse> { _interesseFaker }.ToList());
 
             // Act
-            var result = _specification.IsSatisfiedBy(livro);
+            var result = _specification.IsSatisfiedBy(_livroFaker);
 
             // Assert
             result.Should().BeFalse();
@@ -56,14 +61,13 @@ namespace QuerUmLivro.Test.Domain.Specifications.Livros
         [Fact]
         public void ReturnTrue_When_LivroIsNotBeingUsed()
         {
-            // Arrange
-            var livro = _livroFaker.Generate();
+            // Arrange   
 
-            _interesseGatewayMock.Setup(g => g.ObterPorLivro(livro.Id))
+            _interesseGatewayMock.Setup(g => g.ObterPorLivro(_livroFaker.Id))
                 .Returns(Enumerable.Empty<Interesse>().ToList());
 
             // Act
-            var result = _specification.IsSatisfiedBy(livro);
+            var result = _specification.IsSatisfiedBy(_livroFaker);
 
             // Assert
             result.Should().BeTrue();

@@ -10,7 +10,7 @@ namespace QuerUmLivro.Domain.UseCases.Livros
         private readonly Livro _livro;        
 
         private readonly IInteresseGateway _interesseGateway;
-        public DeletarLivroUseCase(Livro livro, IInteresseGateway interesseGateway)
+        public DeletarLivroUseCase(Livro livro, IInteresseGateway interesseGateway) : base(livro)
         {
             _livro = livro;
             _interesseGateway = interesseGateway;
@@ -24,7 +24,7 @@ namespace QuerUmLivro.Domain.UseCases.Livros
 
         public void Deletar()
         {
-            ValidaEspecificacoes(_livro);            
+            ValidaEspecificacoes();            
         }
 
         

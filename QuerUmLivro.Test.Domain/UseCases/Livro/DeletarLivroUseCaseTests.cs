@@ -12,16 +12,22 @@ namespace QuerUmLivro.Test.Domain.UseCases.Livros
     public class DeletarLivroUseCaseTests
     {
         private readonly Mock<IInteresseGateway> _interesseGatewayMock;
-        private readonly Faker<Livro> _livroFaker;
-        private readonly Faker<Interesse> _interesseFaker;
-
+        private readonly Livro _livroFaker;
+        private readonly Interesse _interesseFaker;
+        private readonly Usuario _usuarioFaker;
         public DeletarLivroUseCaseTests()
         {
             _interesseGatewayMock = new Mock<IInteresseGateway>();
 
             _livroFaker = new Faker<Livro>()
-                .CustomInstantiator(f => new Livro(f.Commerce.ProductName()))
-                .RuleFor(l => l.Id, f => f.Random.Int(1, 100));
+                .CustomInstantiator(f => new Livro(f.Commerce.ProductName(), f.Random.Int(1, 100)))  
+                .RuleFor(l => l.Id, f => f.Random.Int(1, 100))
+                .Generate();
+
+            _usuarioFaker = new Faker<Usuario>()
+                .CustomInstantiator(f => new Usuario(f.Person.FullName, new Email(f.Person.Email)))
+              .RuleFor(u => u.Id, f => f.Random.Int(1, 100))              
+              .Generate();
 
             _interesseFaker = new Faker<Interesse>()
             .CustomInstantiator(f => new Interesse(
@@ -30,20 +36,22 @@ namespace QuerUmLivro.Test.Domain.UseCases.Livros
                 f.Lorem.Sentence(),
                 StatusInteresse.EmAnalise,
                 f.Date.Past()))
-            .RuleFor(i => i.LivroId, (f, i) => i.Livro.Id)
-            .RuleFor(i => i.InteressadoId, (f, i) => i.Interessado.Id);
+            .RuleFor(i => i.Livro, (f, i) => _livroFaker)
+            .RuleFor(i => i.LivroId, (f, i) => _livroFaker.Id)
+            .RuleFor(i => i.Interessado, (f, i) => _usuarioFaker)
+            .RuleFor(i => i.InteressadoId, (f, i) => _usuarioFaker.Id)
+            .Generate();
         }
 
         [Fact]
         public void Deletar_Should_ThrowException_When_LivroIdIsZero()
         {
-            // Arrange
-            var livro = _livroFaker.Generate();
-            livro.Id = 0;
+            // Arrange            
+            _livroFaker.Id = 0;
 
-            _interesseGatewayMock.Setup(g => g.ObterPorLivro(livro.Id)).Returns(new List<Interesse>());
+            _interesseGatewayMock.Setup(g => g.ObterPorLivro(_livroFaker.Id)).Returns(new List<Interesse>());
 
-            var useCase = new DeletarLivroUseCase(livro, _interesseGatewayMock.Object);
+            var useCase = new DeletarLivroUseCase(_livroFaker, _interesseGatewayMock.Object);
 
             // Act
             Action action = () => useCase.Deletar();
@@ -57,13 +65,10 @@ namespace QuerUmLivro.Test.Domain.UseCases.Livros
         public void Deletar_Should_ThrowException_When_LivroIsBeingUsed()
         {
             // Arrange
-            var livro = _livroFaker.Generate();
-            var interesse = _interesseFaker.Generate();
-            interesse.LivroId = livro.Id;
 
-            _interesseGatewayMock.Setup(g => g.ObterPorLivro(livro.Id)).Returns(new[] { interesse });
+            _interesseGatewayMock.Setup(g => g.ObterPorLivro(_livroFaker.Id)).Returns(new[] { _interesseFaker });
 
-            var useCase = new DeletarLivroUseCase(livro, _interesseGatewayMock.Object);
+            var useCase = new DeletarLivroUseCase(_livroFaker, _interesseGatewayMock.Object);
 
             // Act
             Action action = () => useCase.Deletar();
@@ -76,13 +81,12 @@ namespace QuerUmLivro.Test.Domain.UseCases.Livros
         [Fact]
         public void Deletar_Should_NotThrowException_When_LivroIsNotBeingUsed()
         {
-            // Arrange
-            var livro = _livroFaker.Generate();
+            // Arrange           
 
-            _interesseGatewayMock.Setup(g => g.ObterPorLivro(livro.Id)).Returns(new List<Interesse>());
+            _interesseGatewayMock.Setup(g => g.ObterPorLivro(_livroFaker.Id)).Returns(new List<Interesse>());
 
 
-            var useCase = new DeletarLivroUseCase(livro, _interesseGatewayMock.Object);
+            var useCase = new DeletarLivroUseCase(_livroFaker, _interesseGatewayMock.Object);
 
             // Act & Assert
             useCase.Invoking(x => x.Deletar()).Should().NotThrow();

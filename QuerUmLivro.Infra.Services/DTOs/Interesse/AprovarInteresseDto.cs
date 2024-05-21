@@ -5,6 +5,7 @@ namespace QuerUmLivro.Infra.Services.DTOs.Interesses
     {
         public int Id { get; set; }
         public int DoadorId { get; set; }
-   
+        public string Status { get; set; }
+
     }
 }

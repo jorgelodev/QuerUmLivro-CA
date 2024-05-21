@@ -1,29 +1,29 @@
 ﻿using QuerUmLivro.Domain.Entities;
 using QuerUmLivro.Domain.Interfaces.Gateways;
+using QuerUmLivro.Domain.Interfaces.Specifications;
+using QuerUmLivro.Domain.Specifications.Usuarios;
 
 
 namespace QuerUmLivro.Domain.UseCases.Livros
 {
-    public class CadastrarUsuarioUseCase
+    public class CadastrarUsuarioUseCase : BaseUseCase<Usuario>
     {
         private readonly Usuario _usuario;        
         private readonly IUsuarioGateway _usuarioGateway;
-        public CadastrarUsuarioUseCase(Usuario usuario, IUsuarioGateway usuarioGateway)
+        public CadastrarUsuarioUseCase(Usuario usuario, IUsuarioGateway usuarioGateway) : base(usuario)
         {
             _usuario = usuario;
             _usuarioGateway = usuarioGateway;
+
+            _specifications = new List<ISpecification<Usuario>>
+            {
+                new UsuarioEmailUnicoSpec(_usuarioGateway)
+            };
         }     
 
         public Usuario Cadastrar()
         {
-            var emailJaUtilizado = _usuarioGateway.EmailJaUtilizado(_usuario);
-
-            //livro.ValidationResult = new LivroAlterarValid(_usuarioRepository).Validate(livro);
-
-            //if (!livro.ValidationResult.IsValid)
-            //    return livro;
-
-
+            ValidaEspecificacoes();
 
             return _usuario;
         }

@@ -9,7 +9,7 @@ namespace QuerUmLivro.Domain.Interfaces.Gateways
         Livro Cadastrar(Livro livro);
         Livro Deletar(int id);
         Livro ObterPorId(int id);
-        IList<Livro> ObterPorDoador(int idUsuario);
+        IList<Livro> ObterPorDoador(int idDoador);
         IList<Livro> Disponiveis();
         ICollection<Livro> ObterComInteresse(int idDoador);        
     }

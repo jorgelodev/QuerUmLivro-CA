@@ -27,22 +27,18 @@ namespace QuerUmLivro.Infra.Services
         }
 
         public AlteraLivroDto Alterar(AlteraLivroDto alteraLivroDto)
-        {
-            var livroModificado = _mapper.Map<Livro>(alteraLivroDto);
-
-            var livro = _livroGateway.ObterPorId(livroModificado.Id);
-
-            if (livro == null)
+        {   
+            var livro = _livroGateway.ObterPorId(alteraLivroDto.Id) ??
                 throw new DomainValidationException("Livro não encontrado");
 
-            livro.Nome = livroModificado.Nome;            
-            
+            livro.Nome = alteraLivroDto.Nome;
+
             var alterarLivroUseCase = new AlterarLivroUseCase(livro, _livroGateway);
 
-            alterarLivroUseCase.Alterar();  
+            alterarLivroUseCase.Alterar();
 
             return _mapper.Map<AlteraLivroDto>(_livroGateway.Alterar(livro));
-         
+
         }
 
         public LivroDto Cadastrar(CadastraLivroDto livroDto)
@@ -60,13 +56,13 @@ namespace QuerUmLivro.Infra.Services
         {
             var livro = _livroGateway.ObterPorId(id);
 
-            if(livro == null)            
-                throw new DomainValidationException("Livro não encontrado");                
-            
+            if (livro == null)
+                throw new DomainValidationException("Livro não encontrado");
+
 
             var deletarLivroUseCase = new DeletarLivroUseCase(livro, _interesseGateway);
 
-            deletarLivroUseCase.Deletar();           
+            deletarLivroUseCase.Deletar();
 
             return _mapper.Map<LivroDto>(_livroGateway.Deletar(id));
         }
@@ -98,6 +94,6 @@ namespace QuerUmLivro.Infra.Services
 
             return _mapper.Map<ICollection<LivroComInteressesDto>>(livros);
         }
-        
+
     }
 }

@@ -1,28 +1,28 @@
 ﻿using QuerUmLivro.Domain.Entities;
-using QuerUmLivro.Domain.Interfaces.Gateways;
+using QuerUmLivro.Domain.Interfaces.Specifications;
+using QuerUmLivro.Domain.Specifications.Usuarios;
 
 
 namespace QuerUmLivro.Domain.UseCases.Livros
 {
-    public class DesativarUsuarioUseCase
+    public class DesativarUsuarioUseCase : BaseUseCase<Usuario>
     {
-        private readonly Usuario _usuario;        
-        private readonly IUsuarioGateway _usuarioGateway;
-        public DesativarUsuarioUseCase(Usuario usuario, IUsuarioGateway usuarioGateway)
+        private readonly Usuario _usuario;                
+        public DesativarUsuarioUseCase(Usuario usuario) : base(usuario)
         {
-            _usuario = usuario;
-            _usuarioGateway = usuarioGateway;
+            _usuario = usuario;            
+
+            _specifications = new List<ISpecification<Usuario>>
+            {
+                new UsuarioIdDeveSerInformadoSpec()                
+            };
         }     
 
         public Usuario Desativar()
         {
-            //livro.ValidationResult = new LivroAlterarValid(_usuarioRepository).Validate(livro);
+            ValidaEspecificacoes();
 
-            //if (!livro.ValidationResult.IsValid)
-            //    return livro;
-
-            _usuario.Desativado = true;
-            
+            _usuario.Desativado = true;           
 
             return _usuario;
         }

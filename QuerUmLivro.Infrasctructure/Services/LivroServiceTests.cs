@@ -3,6 +3,7 @@ using Bogus;
 using FluentAssertions;
 using Moq;
 using QuerUmLivro.Domain.Entities;
+using QuerUmLivro.Domain.Entities.ValueObjects;
 using QuerUmLivro.Domain.Exceptions;
 using QuerUmLivro.Domain.Interfaces.Gateways;
 using QuerUmLivro.Infra.Services;
@@ -36,13 +37,13 @@ namespace QuerUmLivro.Test.Infra.Services
                 _interesseGatewayMock.Object);
 
             _usuarioFaker = new Faker<Usuario>()
-                .RuleFor(u => u.Id, f => f.Random.Int(1, 100))
-                .RuleFor(u => u.Nome, f => f.Person.FullName)
+                .CustomInstantiator(f => new Usuario(f.Person.FullName, new Email(f.Person.Email)))
+                .RuleFor(u => u.Id, f => f.Random.Int(1, 100))                
                 .Generate();
 
             _livroFaker = new Faker<Livro>()
-                .CustomInstantiator(f => new Livro(f.Commerce.ProductName()))
-                .RuleFor(l => l.Id, f => f.Random.Int(1, 100))                
+                .CustomInstantiator(f => new Livro(f.Commerce.ProductName(), f.Random.Int(1, 100)))
+                .RuleFor(l => l.Id, f => f.Random.Int(1, 100))
                 .RuleFor(l => l.DoadorId, f => _usuarioFaker.Id)
                 .RuleFor(l => l.Doador, f => _usuarioFaker)
                 .RuleFor(l => l.Disponivel, f => f.Random.Bool());
@@ -61,9 +62,6 @@ namespace QuerUmLivro.Test.Infra.Services
                 .RuleFor(l => l.DoadorId, f => f.Random.Int(1, 100))
                 .RuleFor(l => l.Disponivel, f => f.Random.Bool());
 
-            _usuarioFaker = new Faker<Usuario>()
-                .RuleFor(u => u.Id, f => f.Random.Int(1, 100))
-                .RuleFor(u => u.Nome, f => f.Person.FullName);
         }
 
         [Fact]

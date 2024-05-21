@@ -4,6 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>60cd8cfd-eae5-4c89-819f-2c7952ccefde</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +13,11 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.19" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.19">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>

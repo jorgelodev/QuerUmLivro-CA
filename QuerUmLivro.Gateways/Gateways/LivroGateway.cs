@@ -30,7 +30,8 @@ namespace QuerUmLivro.Gateways.Gateways
 
         public IList<Livro> Disponiveis()
         {
-            return _livroRepository.Disponiveis();
+            return _livroRepository.Buscar(l => l.Disponivel)
+               .ToList();
         }
 
         public ICollection<Livro> ObterComInteresse(int idDoador)
@@ -38,9 +39,10 @@ namespace QuerUmLivro.Gateways.Gateways
             return _livroRepository.ObterComInteresse(idDoador);
         }
 
-        public IList<Livro> ObterPorDoador(int idUsuario)
+        public IList<Livro> ObterPorDoador(int idDoador)
         {
-            return _livroRepository.ObterPorDoador(idUsuario);
+            return _livroRepository.Buscar(l => l.DoadorId == idDoador).ToList();
+            
         }
 
         public Livro ObterPorId(int id)

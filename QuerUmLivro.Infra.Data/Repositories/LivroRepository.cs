@@ -12,15 +12,6 @@ namespace QuerUmLivro.Infra.Data.Repositories
 
         }
 
-        public IList<Livro> Disponiveis()
-        {
-            var livros = this._dbSet
-               .Where(l => l.Disponivel)
-               .ToList();
-
-            return livros;
-        }
-
         public ICollection<Livro> ObterComInteresse(int idDoador)
         {
             var livros = this._dbSet
@@ -29,15 +20,7 @@ namespace QuerUmLivro.Infra.Data.Repositories
                 .ToList();
 
             return livros;
-        }  
-
-        public IList<Livro> ObterPorDoador(int idDoador)
-        {
-            var livros = this._dbSet
-                .Where(l => l.DoadorId == idDoador)                
-                .ToList();
-
-            return livros;
         }
+       
     }
 }

@@ -19,8 +19,7 @@ namespace QuerUmLivro.Infra.Data.EntityConfig
                 .IsRequired()
                 .HasColumnType("varchar(100)");
             builder.Property(p => p.InteressadoId).IsRequired();
-            builder.Property(p => p.LivroId).IsRequired();
-            builder.Property(p => p.Aprovado).IsRequired();
+            builder.Property(p => p.LivroId).IsRequired();            
             builder.Property(p => p.Data).IsRequired();
 
             builder.Property(p => p.Status)

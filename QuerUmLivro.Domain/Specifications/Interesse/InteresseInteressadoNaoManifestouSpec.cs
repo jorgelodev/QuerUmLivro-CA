@@ -1,6 +1,5 @@
 ﻿using QuerUmLivro.Domain.Entities;
 using QuerUmLivro.Domain.Interfaces.Gateways;
-using QuerUmLivro.Domain.Interfaces.Repositories;
 using QuerUmLivro.Domain.Interfaces.Specifications;
 
 namespace QuerUmLivro.Domain.Specifications.Interesses

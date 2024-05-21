@@ -1,20 +1,26 @@
-﻿using System.Text.RegularExpressions;
+﻿using QuerUmLivro.Domain.Exceptions;
+using System.Text.RegularExpressions;
 
 namespace QuerUmLivro.Domain.Entities.ValueObjects
 {
     public class Email
     {
-        public string Value { get; }
+        public string EnderecoEmail { get; }
 
-        public Email(string value)
+        public Email(string email)
         {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("Email é obrigatório.");
+            var validationResult = new List<string>();
 
-            if (!IsValidEmail(value))
-                throw new ArgumentException("Formato de email inválido.");
+            if (string.IsNullOrWhiteSpace(email))
+                 validationResult.Add("Email é obrigatório.");            
 
-            Value = value;
+            if (!IsValidEmail(email))
+                validationResult.Add("Formato de email inválido.");
+
+            if (validationResult.Any())
+                throw new DomainValidationException(validationResult);
+
+            EnderecoEmail = email;
         }
 
         private static bool IsValidEmail(string email)
@@ -26,18 +32,18 @@ namespace QuerUmLivro.Domain.Entities.ValueObjects
         public override bool Equals(object obj)
         {
             if (obj is Email other)
-                return Value == other.Value;
+                return EnderecoEmail == other.EnderecoEmail;
             return false;
         }
 
         public override int GetHashCode()
         {
-            return Value.GetHashCode();
+            return EnderecoEmail.GetHashCode();
         }
 
         public override string ToString()
         {
-            return Value;
+            return EnderecoEmail;
         }
     }
 }

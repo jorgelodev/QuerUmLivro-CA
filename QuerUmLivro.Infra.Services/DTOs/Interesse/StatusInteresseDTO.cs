@@ -35,6 +35,8 @@
             }
         }
 
+        #region Métodos Sobreescritos
+
         public override bool Equals(object obj)
         {
             if (obj is StatusInteresseDto status)
@@ -54,5 +56,6 @@
         {
             return Text;
         }
+        #endregion
     }
 }

@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Moq;
 using QuerUmLivro.Domain.Entities;
+using QuerUmLivro.Domain.Entities.ValueObjects;
 using QuerUmLivro.Domain.Interfaces.Gateways;
 using QuerUmLivro.Domain.Specifications.Livros;
 
@@ -21,12 +22,12 @@ namespace QuerUmLivro.Test.Domain.Specifications.Livros
             _specification = new LivroDoadorExisteSpec(_usuarioGatewayMock.Object);
 
             _livroFaker = new Faker<Livro>()
-                .CustomInstantiator(f => new Livro(f.Commerce.ProductName()))
+                .CustomInstantiator(f => new Livro(f.Commerce.ProductName(), f.Random.Int(1, 100)))
                 .RuleFor(l => l.DoadorId, f => f.Random.Int(1, 100));
 
             _usuarioFaker = new Faker<Usuario>()
-                .RuleFor(u => u.Id, f => f.Random.Int(1, 100))
-                .RuleFor(u => u.Nome, f => f.Person.FullName);
+                .CustomInstantiator(f => new Usuario(f.Person.FullName, new Email(f.Person.Email)))
+                .RuleFor(u => u.Id, f => f.Random.Int(1, 100));
         }
 
         [Fact]

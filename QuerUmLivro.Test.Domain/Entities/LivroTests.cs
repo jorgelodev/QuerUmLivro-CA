@@ -14,7 +14,7 @@ namespace QuerUmLivro.Test.Domain.Entities
             string nomeInvalido = null;
 
             // Act
-            Action act = () => new Livro(nomeInvalido);
+            Action act = () => new Livro(nomeInvalido, 1);
 
             // Assert
             act.Should().Throw<DomainValidationException>()
@@ -28,7 +28,7 @@ namespace QuerUmLivro.Test.Domain.Entities
             string nomeInvalido = new string('a', 101);
 
             // Act
-            Action act = () => new Livro(nomeInvalido);
+            Action act = () => new Livro(nomeInvalido, 1);
 
             // Assert
             act.Should().Throw<DomainValidationException>()
@@ -42,7 +42,7 @@ namespace QuerUmLivro.Test.Domain.Entities
             string nomeValido = "Nome do Livro";
 
             // Act
-            Action act = () => new Livro(nomeValido);
+            Action act = () => new Livro(nomeValido, 1);
 
             // Assert
             act.Should().NotThrow<DomainValidationException>();
